@@ -27,9 +27,9 @@ I am using SMOTE (Synthetic Minority Oversampling Technique) and ADASYN ( Adapti
 
 Here are some examples of SMOTE creating new points. The original data points are in blue and the newly created points are in red: 
 
-|<img src="smote_pts1.png.png" alt="" width="300"/>|<img src="smote_pts2.png.png" alt="" width="300"/>|
+|<img src="/images/smote_pts1.png.png" alt="" width="300"/>|<img src="/images/smote_pts2.png.png" alt="" width="300"/>|
 |---|---|
-|<img src="smote_pts3.png.png" alt="" width="300"/>|<img src="smote_pts4.png.png" alt="" width="300"/>|
+|<img src="/images/smote_pts3.png.png" alt="" width="300"/>|<img src="/images/smote_pts4.png.png" alt="" width="300"/>|
 
 <img src="smote_pts1.png.png" alt="" width="300"/>
 <img src="smote_pts2.png.png" alt="" width="300"/>
