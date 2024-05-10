@@ -80,7 +80,7 @@ source: https://www.javatpoint.com/k-nearest-neighbor-algorithm-for-machine-lear
 
 ---
 
-### Decision Tree
+## Decision Tree
 
 <img src="/images/tree_diagram2.png" alt="" width="400"/>
 source: https://www.smartdraw.com/decision-tree/
@@ -101,7 +101,7 @@ max_depth = 5
 
 ---
 
-### Logistic Regression
+## Logistic Regression
 
 <img src="/images/lr_diagram.png" alt="" width="400"/>
 source: https://medium.com/analytics-vidhya/the-math-behind-logistic-regression-c2f04ca27bca
@@ -119,7 +119,7 @@ source: https://medium.com/analytics-vidhya/the-math-behind-logistic-regression-
 
 ---
 
-### Random Forest
+## Random Forest
 
 <img src="/images/rf_diagram.png" alt="" width="400"/>
 source: https://www.researchgate.net/figure/Schematic-diagram-of-the-random-forest-algorithm_fig3_355828449
