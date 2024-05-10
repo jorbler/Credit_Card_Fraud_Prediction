@@ -14,22 +14,27 @@ A Principle Component Analysis (PCA) transformation and dimensionality analysis 
 ## Class Imbalance
 The most difficult part of this dataset was the class imbalance between fraudulent and genuine transactions. There are 284,315 real charges (y = 0) and only 492 fraud charges (y = 1). This means that for every fraudulent charge there are 588 real charges and that only 0.17305% of the dataset is the class that we are trying to detect.
 
-<img src="/images/beforesmote.png.png" alt="Bar graph showing the extreme class balance" width="800"/>
+<img src="/images/beforesmote.png.png" alt="Bar graph showing the extreme class balance" width="600"/>
 
 # Methods
 ## Preprocessing
 Checking for null values:
 
-![](/images/null_values.png.png)
+<img src="/images/null_values.png.png" alt="drawing" width="200"/>
 
 ### SMOTE and ADASYN for Minority Oversampling
 I am using SMOTE (Synthetic Minority Oversampling Technique) and ADASYN ( Adaptive Synthetic Sampling) to address the class imbalance that this dataset presents. SMOTE works by selecting examples that are close in the feature space, drawing a line between the examples in the feature space and drawing a new sample at a point along that line ^2^. ADASYN focuses on the minority instances that are difficult to classify correctly, rather than oversampling all minority instances uniformly. It assigns a different weight to each minority instance based on its level of difficulty in classification ^3^. While the two minority oversampling techniques have different approaches, due to the extremity of the class imbalance and the fact that they each had to create nearly 600 new points for every point in the original data, they ended up producing nearly identical results. For thoroughness, I will test both SMOTE and ADASYN on each classification model.
 
 Here are some examples of SMOTE creating new points. The original data points are in blue and the newly created points are in red: 
-![](/images/smote_pts1.png.png)
-![](/images/smote_pts2.png.png)
-![](/images/smote_pts3.png.png)
-![](/images/smote_pts4.png.png)
+
+|<img src="smote_pts1.png.png" alt="" width="300"/>|<img src="smote_pts2.png.png" alt="" width="300"/>|
+|---|---|
+|<img src="smote_pts3.png.png" alt="" width="300"/>|<img src="smote_pts4.png.png" alt="" width="300"/>|
+
+<img src="smote_pts1.png.png" alt="" width="300"/>
+<img src="smote_pts2.png.png" alt="" width="300"/>
+<img src="smote_pts3.png.png" alt="" width="300"/>
+<img src="smote_pts4.png.png" alt="" width="300"/>
 
 ### Scaling
 I scaled all of the X features using the standard scaler from Sklearn's preprocessing module.
@@ -37,28 +42,33 @@ I scaled all of the X features using the standard scaler from Sklearn's preproce
 ## Visualizing the Data
 To see the difference in the data before and after applying SMOTE/ADASYN, I created correlation matrices and used heat maps to visualize them:
 
-<img src="/images/corr_matrix_og.png.png" alt="drawing" width="200"/>
+<img src="/images/corr_matrix_og.png.png" alt="" width="700"/>
 
-![](/images/corr_matrix_og.png.png)
+<img src="/images/corr_matrix_smote.png.png" alt="Heat map of correlation matrix after applying SMOTE" width="700"/>
 
-![Heat map of correlation matrix after applying SMOTE](/images/corr_matrix_smote.png.png)
+---
 
 Scatterplots showing fraud transactions (red) and real transactions (blue) for different variables:
 
-![V1 vs V3](/images/V1V2.png.png)
-![V1 vs V2](/images/V1V3.png.png)
+<img src="/images/V1V2.png.png" alt="V1 vs V3" width="700"/>
+<img src="/images/V1V3.png.png" alt="V1 vs V2" width="700"/>
 
 ## Classification Methods
 I decided to try four different classification methods to try to get the best results for this data. For this problem, it is important to detect all positive cases (y = 1), as these are fraud cases. Obviously we want to minimize both false positives and false negatives, however missing a fraudulent transaction, given how rare they are, is a worse error accidentally flagging a real charge as fraud. Because less than a fifth of a percent of the original data set are positive cases, if the model misclassified all of them as real charges, the accuracy would still be over 99.8%. To combat this, I will be using recall score, precision score, and confusion matrix in addition to accuracy to check the performance of each model. 
 
-Recall = true positives / (true positives + true negatives)
-![confusion matrix](/images/recall_diagram.png)
-Precision = true positives / (true positives + false positives)
-![confusion matrix](/images/precision_diagram.png)
+**Recall = true positives / (true positives + true negatives)**
 
+<img src="/images/recall_diagram.png" alt="source: https://towardsdatascience.com/accuracy-precision-recall-or-f1-331fb37c5cb9" width="700"/>
+
+**Precision = true positives / (true positives + false positives)**
+
+<img src="/images/precision_diagram.png" alt="source: https://towardsdatascience.com/accuracy-precision-recall-or-f1-331fb37c5cb9" width="700"/>
 
 ### K-Nearest Neighbor
+
 ![https://www.javatpoint.com/k-nearest-neighbor-algorithm-for-machine-learning](/images/knn_diagram.png)
+<img src="/images/knn_diagram.png" alt="source: https://www.javatpoint.com/k-nearest-neighbor-algorithm-for-machine-learning" width="500"/>
+
 k = 5
 |   |SMOTE|ADASYN|
 |---|---|---|
@@ -66,12 +76,17 @@ k = 5
 |recall|0.97857|0.97971
 |precision|0.94744|0.94516
 
-Confusion Matrix:
-![SMOTE](/images/cf_knn_smote.png)
-![ADASYN](/images/cf_knn_adasyn.png)
+**Confusion Matrix:**
+
+<img src="/images/cf_knn_smote.png" alt="SMOTE" width="400"/>
+<img src="/images/cf_knn_adasym.png" alt="SMOTE" width="400"/>
 
 ### Decision Tree
-![https://www.smartdraw.com/decision-tree/](/images/tree_diagram.png)
+
+<img src="/images/tree_diagram.png" alt="source: https://www.smartdraw.com/decision-tree/" width="400"/>
+
+---
+
 max_depth = 5
 
 |   |SMOTE|ADASYN|
@@ -80,12 +95,17 @@ max_depth = 5
 |recall|0.95801|0.95637 
 |precision|0.98122|0.98016
 
-Confusion Matrix:
-![SMOTE](/images/cf_tree_smote.png)
-![ADASYN](/images/cf_tree_adasyn.png)
+**Confusion Matrices:**
+
+<img src="/images/cf_tree_smote.png" alt="SMOTE" width="400"/>
+<img src="/images/cf_tree_adasyn.png" alt="ADASYN" width="400"/>
+
 
 ### Logistic Regression
-![https://medium.com/analytics-vidhya/the-math-behind-logistic-regression-c2f04ca27bca](/images/lr_diagram.png)
+
+<img src="/images/cf_tree_smote.png" alt="source: https://medium.com/analytics-vidhya/the-math-behind-logistic-regression-c2f04ca27bca" width="400"/>
+
+---
 
 |   |SMOTE|ADASYN|
 |---|---|---|
@@ -94,11 +114,16 @@ Confusion Matrix:
 |precision|0.96741|0.97868
 
 Confusion Matrix:
-![SMOTE](/images/cf_lr_smote.png)
-![ADASYN](/images/cf_lr_adasyn.png)
+
+<img src="/images/cf_lr_smote.png" alt="SMOTE" width="400"/>
+<img src="/images/cf_lr_adasyn.png" alt="ADASYN" width="400"/>
 
 ### Random Forest
-![https://www.researchgate.net/figure/Schematic-diagram-of-the-random-forest-algorithm_fig3_355828449](/images/rf_diagram.png)
+
+<img src="/images/rf_diagram.png" alt="source: https://www.researchgate.net/figure/Schematic-diagram-of-the-random-forest-algorithm_fig3_355828449" width="400"/>
+
+---
+
 n_estimators = 100
 
 |   |SMOTE|ADASYN|
@@ -107,12 +132,16 @@ n_estimators = 100
 |recall|1.00000|1.00000
 |precision|0.99982|0.99981
 
-Confusion Matrix:
-![SMOTE](/images/cf_rf_smote.png)
-![ADASYN](/images/cf_rf_adasyn.png)
+**Confusion Matrix:**
+
+<img src="/images/cf_rf_smote.png" alt="SMOTE" width="400"/>
+<img src="/images/cf_rf_adasyn.png" alt="ADASYN" width="400"/>
 
 ## Validation
 Based off of the results above, the best model for this data is the random forest with SMOTE. To confirm the metrics, I will be performing a k-fold cross-validation with k = 6 and precision as the scoring method. The results are as follows: 
+
+<img src="/images/kfcv.png" alt="K-Fold Cross Validation Diagram with k=6" width="500"/>
+
 |Split  | Precision |
 |--|--|
 |1|0.98818|
