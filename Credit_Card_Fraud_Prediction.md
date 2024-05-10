@@ -14,7 +14,7 @@ A Principle Component Analysis (PCA) transformation and dimensionality analysis 
 ## Class Imbalance
 The most difficult part of this dataset was the class imbalance between fraudulent and genuine transactions. There are 284,315 real charges (y = 0) and only 492 fraud charges (y = 1). This means that for every fraudulent charge there are 588 real charges and that only 0.17305% of the dataset is the class that we are trying to detect.
 
-![Bar graph showing the extreme class balance.](/images/beforesmote.png.png)
+<img src="/images/beforesmote.png.png" alt="Bar graph showing the extreme class balance" width="800"/>
 
 # Methods
 ## Preprocessing
