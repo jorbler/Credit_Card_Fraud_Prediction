@@ -53,13 +53,11 @@ I decided to try four different classification methods to try to get the best re
 **Recall = true positives / (true positives + true negatives)**
 
 <img src="/images/recall_diagram.png" alt="" width="700"/>
-
 source: https://towardsdatascience.com/accuracy-precision-recall-or-f1-331fb37c5cb9
 
 **Precision = true positives / (true positives + false positives)**
 
 <img src="/images/precision_diagram.png" alt="" width="700"/> 
-
 source: https://towardsdatascience.com/accuracy-precision-recall-or-f1-331fb37c5cb9
 
 --- 
@@ -67,7 +65,6 @@ source: https://towardsdatascience.com/accuracy-precision-recall-or-f1-331fb37c5
 ## K-Nearest Neighbor
 
 <img src="/images/knn_diagram.png" alt="" width="500"/>
-
 source: https://www.javatpoint.com/k-nearest-neighbor-algorithm-for-machine-learning
 
 |   |SMOTE|ADASYN|
@@ -86,7 +83,6 @@ source: https://www.javatpoint.com/k-nearest-neighbor-algorithm-for-machine-lear
 ### Decision Tree
 
 <img src="/images/tree_diagram2.png" alt="" width="400"/>
-
 source: https://www.smartdraw.com/decision-tree/
 
 
@@ -103,13 +99,12 @@ max_depth = 5
 |<img src="/images/cf_tree_smote.png" alt="SMOTE" width="400"/>|<img src="/images/cf_tree_adasyn.png" alt="ADASYN" width="400"/>|
 |--|--|
 
+---
+
 ### Logistic Regression
 
 <img src="/images/lr_diagram.png" alt="" width="400"/>
-
 source: https://medium.com/analytics-vidhya/the-math-behind-logistic-regression-c2f04ca27bca
-
----
 
 |   |SMOTE|ADASYN|
 |---|---|---|
@@ -122,14 +117,12 @@ source: https://medium.com/analytics-vidhya/the-math-behind-logistic-regression-
 |<img src="/images/cf_lr_smote.png" alt="SMOTE" width="400"/>|<img src="/images/cf_lr_adasyn.png" alt="ADASYN" width="400"/>|
 |--|--|
 
+---
 
 ### Random Forest
 
 <img src="/images/rf_diagram.png" alt="" width="400"/>
-
 source: https://www.researchgate.net/figure/Schematic-diagram-of-the-random-forest-algorithm_fig3_355828449
-
----
 
 n_estimators = 100
 
@@ -143,6 +136,8 @@ n_estimators = 100
 
 |<img src="/images/cf_rf_smote.png" alt="SMOTE" width="400"/>|<img src="/images/cf_rf_adasyn.png" alt="ADASYN" width="400"/>|
 |--|--|
+
+---
 
 ## Validation
 Based off of the results above, the best model for this data is the random forest with SMOTE. K-Fold Cross Validation is a great method for ensuring that a model is not overfit and to test it on more than one test set with the same amount of data. I perform a K-Fold Cross Validation with k = 6: 
@@ -159,7 +154,7 @@ Based off of the results above, the best model for this data is the random fores
 |6|0.99971|
 
 # Discussion and Inferences
-Based on the results of this project, I would use the Random Forest classifier trained on the SMOTE data to predict if future transactions are fraudulent or genuine. The model caught all of the fraud cases and misclassified only .000017% of the real transactions as fraud. It is likely that after transactions are classified as fraud, they are reviewed by a human or possibly the card holder before any action is taken, so while ideally there would be 0 false positives, it is still a very low number and shows that the model is performing well. I would like to test this model on more data to see how it performs, especially because this data is such a small subset of all credit card transactions and is from a small time frame (two days) and only from European cardholders. 
+Based on the results of this project, I would use the Random Forest classifier trained on the SMOTE data to predict if future transactions are fraudulent or genuine. The model caught all of the fraud cases and misclassified only .000017% of the real transactions as fraud. It is likely that after transactions are classified as fraud, they are reviewed by a human or possibly the card holder before any action is taken, so while ideally there would be 0 false positives, it is still a very low number and shows that the model is performing well. I would like to test this model on more data to see how it performs, especially because this data is such a small subset of all credit card transactions and is from a small time frame (two days) and only from European cardholders.
 
 ## References
 1. Caporal, J. (2024, February 29). Identity Theft and Credit Card Fraud Statistics for 2024. The Motley Fool. Retrieved May 10, 2024, from https://www.fool.com/the-ascent/research/identity-theft-credit-card-fraud-statistics/
