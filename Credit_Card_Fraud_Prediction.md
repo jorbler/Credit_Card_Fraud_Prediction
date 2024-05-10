@@ -18,7 +18,7 @@ A Principle Component Analysis (PCA) transformation and dimensionality analysis 
 
   
 
-![The first 10 rows of the dataset.](/images/dataframe.png)
+![The first 10 rows of the dataset.](/images/dataframe.png.png)
 
   
 
