@@ -31,27 +31,22 @@ Here are some examples of SMOTE creating new points. The original data points ar
 |---|---|
 |<img src="/images/smote_pts3.png.png" alt="" width="300"/>|<img src="/images/smote_pts4.png.png" alt="" width="300"/>|
 
-<img src="smote_pts1.png.png" alt="" width="300"/>
-<img src="smote_pts2.png.png" alt="" width="300"/>
-<img src="smote_pts3.png.png" alt="" width="300"/>
-<img src="smote_pts4.png.png" alt="" width="300"/>
-
 ### Scaling
 I scaled all of the X features using the standard scaler from Sklearn's preprocessing module.
 
 ## Visualizing the Data
 To see the difference in the data before and after applying SMOTE/ADASYN, I created correlation matrices and used heat maps to visualize them:
 
-<img src="/images/corr_matrix_og.png.png" alt="" width="700"/>
+<img src="/images/corr_matrix_og.png.png" alt="" width="500"/>
 
-<img src="/images/corr_matrix_smote.png.png" alt="Heat map of correlation matrix after applying SMOTE" width="700"/>
+<img src="/images/corr_matrix_smote.png.png" alt="Heat map of correlation matrix after applying SMOTE" width="500"/>
 
 ---
 
 Scatterplots showing fraud transactions (red) and real transactions (blue) for different variables:
 
-<img src="/images/V1V2.png.png" alt="V1 vs V3" width="700"/>
-<img src="/images/V1V3.png.png" alt="V1 vs V2" width="700"/>
+|<img src="/images/V1V2.png.png" alt="V1 vs V3" width="700"/>|<img src="/images/V1V3.png.png" alt="V1 vs V2" width="700"/>|
+|--|--|
 
 ## Classification Methods
 I decided to try four different classification methods to try to get the best results for this data. For this problem, it is important to detect all positive cases (y = 1), as these are fraud cases. Obviously we want to minimize both false positives and false negatives, however missing a fraudulent transaction, given how rare they are, is a worse error accidentally flagging a real charge as fraud. Because less than a fifth of a percent of the original data set are positive cases, if the model misclassified all of them as real charges, the accuracy would still be over 99.8%. To combat this, I will be using recall score, precision score, and confusion matrix in addition to accuracy to check the performance of each model. 
@@ -69,14 +64,20 @@ I decided to try four different classification methods to try to get the best re
 ![https://www.javatpoint.com/k-nearest-neighbor-algorithm-for-machine-learning](/images/knn_diagram.png)
 <img src="/images/knn_diagram.png" alt="source: https://www.javatpoint.com/k-nearest-neighbor-algorithm-for-machine-learning" width="500"/>
 
+---
+
 k = 5
+
 |   |SMOTE|ADASYN|
 |---|---|---|
 |accuracy|0.9621|0.96134| 
 |recall|0.97857|0.97971
 |precision|0.94744|0.94516
 
-**Confusion Matrix:**
+**Confusion Matrices:**
+
+|<img src="/images/cf_knn_smote.png" alt="SMOTE" width="400"/>|<img src="/images/cf_knn_adasym.png" alt="SMOTE" width="400"/>|
+|--|--|
 
 <img src="/images/cf_knn_smote.png" alt="SMOTE" width="400"/>
 <img src="/images/cf_knn_adasym.png" alt="SMOTE" width="400"/>
@@ -97,9 +98,8 @@ max_depth = 5
 
 **Confusion Matrices:**
 
-<img src="/images/cf_tree_smote.png" alt="SMOTE" width="400"/>
-<img src="/images/cf_tree_adasyn.png" alt="ADASYN" width="400"/>
-
+|<img src="/images/cf_tree_smote.png" alt="SMOTE" width="400"/>|<img src="/images/cf_tree_adasyn.png" alt="ADASYN" width="400"/>|
+|--|--|
 
 ### Logistic Regression
 
@@ -113,10 +113,11 @@ max_depth = 5
 |recall|0.94805|0.96181
 |precision|0.96741|0.97868
 
-Confusion Matrix:
+**Confusion Matrices:**
 
-<img src="/images/cf_lr_smote.png" alt="SMOTE" width="400"/>
-<img src="/images/cf_lr_adasyn.png" alt="ADASYN" width="400"/>
+|<img src="/images/cf_lr_smote.png" alt="SMOTE" width="400"/>|<img src="/images/cf_lr_adasyn.png" alt="ADASYN" width="400"/>|
+|--|--|
+
 
 ### Random Forest
 
@@ -132,13 +133,13 @@ n_estimators = 100
 |recall|1.00000|1.00000
 |precision|0.99982|0.99981
 
-**Confusion Matrix:**
+**Confusion Matrices:**
 
-<img src="/images/cf_rf_smote.png" alt="SMOTE" width="400"/>
-<img src="/images/cf_rf_adasyn.png" alt="ADASYN" width="400"/>
+|<img src="/images/cf_rf_smote.png" alt="SMOTE" width="400"/>|<img src="/images/cf_rf_adasyn.png" alt="ADASYN" width="400"/>|
+|--|--|
 
 ## Validation
-Based off of the results above, the best model for this data is the random forest with SMOTE. To confirm the metrics, I will be performing a k-fold cross-validation with k = 6 and precision as the scoring method. The results are as follows: 
+Based off of the results above, the best model for this data is the random forest with SMOTE. K-Fold Cross Validation is a great method for ensuring that a model is not overfit and to test it on more than one test set with the same amount of data. I perform a K-Fold Cross Validation with k = 6: 
 
 <img src="/images/kfcv.png" alt="K-Fold Cross Validation Diagram with k=6" width="500"/>
 
