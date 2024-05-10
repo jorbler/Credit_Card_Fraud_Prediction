@@ -36,6 +36,8 @@ I scaled all of the X features using the standard scaler from Sklearn's preproce
 
 ## Visualizing the Data
 To see the difference in the data before and after applying SMOTE/ADASYN, I created correlation matrices and used heat maps to visualize them:
+
+<img src="corr_matrix_og.png.png" alt="drawing" width="200"/>
 ![](/images/corr_matrix_og.png.png)
 
 ![Heat map of correlation matrix after applying SMOTE](/images/corr_matrix_smote.png.png)
