@@ -1,0 +1,1 @@
+For my final project for Advanced Applied Machine Learning, I am doing binary classification (fraudulent or real) for credit card transactions. The data is from Kaggle: https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud.
