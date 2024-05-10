@@ -1,99 +1,124 @@
 # Abstract
 
-  
 
 # Introduction
-
 In 1899 a livestock farmer received a credit card in the mail, but threw it away because he was not interested in using credit. Someone else picked up the credit card and began spending copious amounts of money on luxury transportation. The livestock farmer ended up incurring all of the charges at the end of the month and this case was recorded as the first case of credit card fraud in the United States.
 
-  
-
 # Description of the Data
-
-The dataset that I am using is from Kaggle (https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud). The data was collected over two days in September 2013, describing 284,807 credit card transactions made by European cardholders.
-
-  
+The dataset that I am using is from Kaggle (https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) ^1^. The data was collected over two days in September 2013, describing 284,807 credit card transactions made by European cardholders.
 
 A Principle Component Analysis (PCA) transformation and dimensionality analysis was used to obtain the features 'V1', 'V2', - ..., - 'V28'. To protect the information of the cardholders and maintain confidentiality, no more information about these features was provided by the dataset creator. 'Time' is the amount of time that has elapsed since the first transaction in the dataset, in seconds. 'Amount is the amount of money charged in each transaction.
 
-  
-
 ![The first 10 rows of the dataset.](/images/dataframe.png.png)
 
-  
-
 ## Class Imbalance
-
 The most difficult part of this dataset was the class imbalance between fraudulent and genuine transactions. There are 284,315 real charges (y = 0) and only 492 fraud charges (y = 1). This means that for every fraudulent charge there are 588 real charges and that only 0.17305% of the dataset is the class that we are trying to detect.
-
-  
 
 ![Bar graph showing the extreme class balance.](/images/beforesmote.png.png)
 
-  
-
-## Exploratory Data Analysis
-
-  
-  
-
 # Methods
-
 ## Preprocessing
-
 Checking for null values:
 
 ![](/images/null_values.png.png)
 
-  
-
 ### SMOTE and ADASYN for Minority Oversampling
+I am using SMOTE (Synthetic Minority Oversampling Technique) and ADASYN ( Adaptive Synthetic Sampling) to address the class imbalance that this dataset presents. SMOTE works by selecting examples that are close in the feature space, drawing a line between the examples in the feature space and drawing a new sample at a point along that line ^2^. ADASYN focuses on the minority instances that are difficult to classify correctly, rather than oversampling all minority instances uniformly. It assigns a different weight to each minority instance based on its level of difficulty in classification ^3^. While the two minority oversampling techniques have different approaches, due to the extremity of the class imbalance and the fact that they each had to create nearly 600 new points for every point in the original data, they ended up producing nearly identical results. For thoroughness, I will test both SMOTE and ADASYN on each classification model.
 
-I am using SMOTE (Synthetic Minority Oversampling Technique) and ADASYN ( Adaptive Synthetic Sampling) to address the class imbalance that this dataset presents. SMOTE works by selecting examples that are close in the feature space, drawing a line between the examples in the feature space and drawing a new sample at a point along that line [^1]. ADASYN focuses on the minority instances that are difficult to classify correctly, rather than oversampling all minority instances uniformly. It assigns a different weight to each minority instance based on its level of difficulty in classification [^2]. While the two minority oversampling techniques have different approaches, due to the extremity of the class imbalance and the fact that they each had to create nearly 600 new points for every point in the original data, they ended up producing nearly identical results. For thoroughness, I will test both SMOTE and ADASYN on each classification model.
-
-  
-
-Here are some examples of SMOTE creating new points. The original data points are in blue and the newly created points are in red:
-
-  
+Here are some examples of SMOTE creating new points. The original data points are in blue and the newly created points are in red: 
 ![](/images/smote_pts1.png.png)
-
 ![](/images/smote_pts2.png.png)
-
 ![](/images/smote_pts3.png.png)
-
 ![](/images/smote_pts4.png.png)
 
-  
-
 ### Scaling
-
 I scaled all of the X features using the standard scaler from Sklearn's preprocessing module.
 
-  
-
 ## Visualizing the Data
-
-  
-
 To see the difference in the data before and after applying SMOTE/ADASYN, I created correlation matrices and used heat maps to visualize them:
-
-  
-
 ![](/images/corr_matrix_og.png.png)
-
-  
 
 ![Heat map of correlation matrix after applying SMOTE](/images/corr_matrix_smote.png.png)
 
-  
-
 Scatterplots showing fraud transactions (red) and real transactions (blue) for different variables:
 
-  
-
 ![V1 vs V3](/images/V1V2.png.png)
-
-  
-
 ![V1 vs V2](/images/V1V3.png.png)
+
+## Classification Methods
+I decided to try four different classification methods to try to get the best results for this data. For this problem, it is important to detect all positive cases (y = 1), as these are fraud cases. Obviously we want to minimize both false positives and false negatives, however missing a fraudulent transaction, given how rare they are, is a worse error accidentally flagging a real charge as fraud. Because less than a fifth of a percent of the original data set are positive cases, if the model misclassified all of them as real charges, the accuracy would still be over 99.8%. To combat this, I will be using recall score, precision score, and confusion matrix in addition to accuracy to check the performance of each model. 
+
+Recall = true positives / (true positives + true negatives)
+![confusion matrix](/images/recall_diagram.png)
+Precision = true positives / (true positives + false positives)
+![confusion matrix](/images/precision_diagram.png)
+
+
+### K-Nearest Neighbor
+![https://www.javatpoint.com/k-nearest-neighbor-algorithm-for-machine-learning](/images/knn_diagram.png)
+k = 5
+|   |SMOTE|ADASYN|
+|---|---|---|
+|accuracy|0.9621|0.96134| 
+|recall|0.97857|0.97971
+|precision|0.94744|0.94516
+
+Confusion Matrix:
+![SMOTE](/images/cf_knn_smote.png)
+![ADASYN](/images/cf_knn_adasyn.png)
+
+### Decision Tree
+![https://www.smartdraw.com/decision-tree/](/images/tree_diagram.png)
+max_depth = 5
+
+|   |SMOTE|ADASYN|
+|---|---|---|
+|accuracy|0.96844|0.96848| 
+|recall|0.95801|0.95637 
+|precision|0.98122|0.98016
+
+Confusion Matrix:
+![SMOTE](/images/cf_tree_smote.png)
+![ADASYN](/images/cf_tree_adasyn.png)
+
+### Logistic Regression
+![https://medium.com/analytics-vidhya/the-math-behind-logistic-regression-c2f04ca27bca](/images/lr_diagram.png)
+
+|   |SMOTE|ADASYN|
+|---|---|---|
+|accuracy|0.95797|0.97039| 
+|recall|0.94805|0.96181
+|precision|0.96741|0.97868
+
+Confusion Matrix:
+![SMOTE](/images/cf_lr_smote.png)
+![ADASYN](/images/cf_lr_adasyn.png)
+
+### Random Forest
+![https://www.researchgate.net/figure/Schematic-diagram-of-the-random-forest-algorithm_fig3_355828449](/images/rf_diagram.png)
+n_estimators = 100
+
+|   |SMOTE|ADASYN|
+|---|---|---|
+|accuracy|0.99991|0.99990| 
+|recall|1.00000|1.00000
+|precision|0.99982|0.99981
+
+Confusion Matrix:
+![SMOTE](/images/cf_rf_smote.png)
+![ADASYN](/images/cf_rf_adasyn.png)
+
+## Validation
+Based off of the results above, the best model for this data is the random forest with SMOTE. To confirm the metrics, I will be performing a k-fold cross-validation with k = 6 and precision as the scoring method. The results are as follows: 
+|Split  | Precision |
+|--|--|
+|1|0.98818|
+|2|0.99983|
+|3|0.99987|
+|4|0.99932|
+|5|0.99966|
+|6|0.99971|
+
+
+# Discussion and Inferences
+Based on the results of this project, I would use the Random Forest classifier trained on the SMOTE data to predict if future transactions are fraudulent or genuine. The model caught all of the fraud cases and misclassified only .000017% of the real transactions as fraud. It is likely that after transactions are classified as fraud, they are reviewed by a human or possibly the card holder before any action is taken, so while ideally there would be 0 false positives, it is still a very low number and shows that the model is performing well. I would like to test this model on more data to see how it performs, especially because this data is such a small subset of all credit card transactions and is from a small time frame (two days) and only from European cardholders. 
