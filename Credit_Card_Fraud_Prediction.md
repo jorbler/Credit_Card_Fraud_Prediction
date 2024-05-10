@@ -28,7 +28,7 @@ The most difficult part of this dataset was the class imbalance between fraudule
 
   
 
-![Bar graph showing the extreme class balance.](https://drive.google.com/file/d/19DwibGMV7J1pb3qB6Ne0HE8z4OtB0fua/view?usp=drive_link)
+![Bar graph showing the extreme class balance.](/images/beforesmote.png.png)
 
   
 
@@ -43,7 +43,7 @@ The most difficult part of this dataset was the class imbalance between fraudule
 
 Checking for null values:
 
-![](https://drive.google.com/file/d/1WGJzxqX9WbCg2cjq3rETXBOcLUhSBk4u/view?usp=drive_link)
+![](/images/null_values.png.png)
 
   
 
@@ -56,23 +56,13 @@ I am using SMOTE (Synthetic Minority Oversampling Technique) and ADASYN ( Adapti
 Here are some examples of SMOTE creating new points. The original data points are in blue and the newly created points are in red:
 
   
-![](https://drive.google.com/file/d/1LR0xNtu7P93Mnw8jeWUCeIL0betjqLnZ/view?usp=drive_link)
+![](/images/smote_pts1.png.png)
 
-![image][1]
-[1]: (https://docs.google.com/uc?export=download&id=ImageID`)
+![](/images/smote_pts2.png.png)
 
-`![my image is here][1]`  
-`[1]: https://docs.google.com/uc?export=download&id=ImageID`
+![](/images/smote_pts3.png.png)
 
-![](https://drive.google.com/file/d/15KcWmPKnzP99cNWOg3ZQEoVQ4rKLUSFD/view?usp=drive_link)
-
-  ![enter image description here](https://ibb.co/jTs38Dw)
-
-![](https://drive.google.com/file/d/1FCRtYC-qnULyjbw646yIZdTFsxYzRvqr/view?usp=drive_link)
-
-  
-
-![](https://drive.google.com/file/d/1lZIs1KyFOjNyD_CSOvQXx-cUlocOSsgG/view?usp=drive_link)
+![](/images/smote_pts4.png.png)
 
   
 
@@ -90,11 +80,11 @@ To see the difference in the data before and after applying SMOTE/ADASYN, I crea
 
   
 
-![Heat map of correlation matrix before SMOTE](https://drive.google.com/file/d/1gBNAwcqowg8hzqtgjoNibhsq7WSnh0X6/view?usp=drive_link)
+![](/images/corr_matrix_og.png.png)
 
   
 
-![Heat map of correlation matrix after applying SMOTE](https://drive.google.com/file/d/1FrcsuyHvPFf0T7wZMgd77PFU9AdHIe3x/view?usp=drive_link)
+![Heat map of correlation matrix after applying SMOTE](/images/corr_matrix_smote.png.png)
 
   
 
@@ -102,8 +92,8 @@ Scatterplots showing fraud transactions (red) and real transactions (blue) for d
 
   
 
-![V1 vs V3](https://drive.google.com/file/d/1eJey6SmICe41mrHAkAEu2tDkG3er5UhL/view)
+![V1 vs V3](/images/V1V2.png.png)
 
   
 
-![V1 vs V2](https://drive.google.com/file/d/1tkUfUkWlMnHqVwYaesxPyLQ2TJgsLs8-/view)
+![V1 vs V2](/images/V1V3.png.png)
