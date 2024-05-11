@@ -134,7 +134,7 @@ n_estimators = 100
 
 **Confusion Matrices:**
 
-|<img src="/images/cf_rf_smote2.png" alt="SMOTE" width="400"/>|<img src="/images/cf_rf_adasyn2.png" alt="ADASYN" width="400"/>|
+|<img src="/images/cf_rf_smote2.png" alt="SMOTE" width="400"/>|<img src="/images/cf_fr_adasyn2.png" alt="ADASYN" width="400"/>|
 |--|--|
 
 ---
